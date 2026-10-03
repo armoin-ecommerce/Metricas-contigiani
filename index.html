@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Informe de métricas · Instagram</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--tx:#1d1d1b;--mu:#6b6b66;--bd:#e4e4df;--c1:#2a6df4;--c2:#8a5cf6;--c3:#e8590c;--c4:#0ca678;--c5:#d6336c;--c6:#868e96;--up:#0a8f5b;--dn:#d1383d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141416;--card:#1e1e22;--tx:#ececea;--mu:#9a9a94;--bd:#33333a;--c1:#6c9bff;--c2:#b39bff;--c3:#ff8a4c;--c4:#3ddbae;--c5:#ff7aa8;--c6:#adb5bd;--up:#3ddbae;--dn:#ff7a7f}}
+:root[data-theme="dark"]{--bg:#141416;--card:#1e1e22;--tx:#ececea;--mu:#9a9a94;--bd:#33333a;--c1:#6c9bff;--c2:#b39bff;--c3:#ff8a4c;--c4:#3ddbae;--c5:#ff7aa8;--c6:#adb5bd;--up:#3ddbae;--dn:#ff7a7f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:22px;margin:0 0 2px}h2{font-size:16px;margin:0 0 10px}.sub{color:var(--mu);margin:0 0 16px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,input{font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:5px 10px}
+button{cursor:pointer}button.on{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.chip.on{color:#fff;border-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.k{border:1px solid var(--bd);border-radius:10px;padding:10px;background:var(--card)}
+.k b{display:block;font-size:24px;line-height:1.2}.k span{font-size:12px;color:var(--mu)}.d{font-size:12px}.up{color:var(--up)}.dn{color:var(--dn)}
+.cv{position:relative;height:300px}
+.ins{display:grid;gap:10px}.ins div{border-left:3px solid var(--c1);padding:2px 0 2px 10px}.ins b{display:block}
+.warn{border-left-color:var(--c3)!important}
+.note{font-size:12px;color:var(--mu)}
+</style></head><body><main>
+<h1>Informe de métricas de Instagram</h1>
+<p class="sub" id="rng"></p>
+
+<div class="card"><div class="bar">
+<button data-p="0" class="on">Todo</button><button data-p="90">90 días</button><button data-p="30">30 días</button><button data-p="7">7 días</button>
+<input type="date" id="f"><input type="date" id="t">
+</div></div>
+
+<div class="grid" id="kpis" style="margin-bottom:14px"></div>
+
+<div class="card"><h2>Evolución</h2>
+<div class="bar" id="chips" style="margin-bottom:8px"></div>
+<div class="bar" style="margin-bottom:8px"><button data-g="d" class="on">Diario</button><button data-g="w">Semanal</button><span class="note" id="nm"></span></div>
+<div class="cv"><canvas id="ln"></canvas></div></div>
+
+<div class="card"><h2>Por mes <span class="note" id="mn"></span></h2><div class="cv" style="height:220px"><canvas id="mo"></canvas></div></div>
+
+<div class="card"><h2>Tasas de conversión</h2><div class="grid" id="rates"></div></div>
+
+<div class="card"><h2>Lectura del período completo</h2><div class="ins">
+<div><b>1. Agosto fue el pico de alcance, pero no de comunidad</b>Agosto sumó 19.658 visualizaciones (récord mensual) y 86 de los 100 clics al enlace del año. Entre el 31/7 y el 2/8 hubo ~1.600 vistas por día con apenas 1 a 3 interacciones y casi ningún seguidor nuevo. Es el patrón típico de tráfico frío (pauta o contenido que se distribuyó a no seguidores). Dio visibilidad, no relación.</div>
+<div><b>2. La interacción cayó cuando creció el alcance</b>Feb–Mar: 2,9% de interacciones sobre vistas (534 sobre 18.398). Jul–Sep: 1,5% (471 sobre 31.860). Agosto puntual: 0,6%. Más vistas con menos respuesta indica audiencia menos afín.</div>
+<div><b>3. El perfil convierte bien cuando lo visitan</b>El 12,5% de las visitas al perfil terminó en seguidor (157 de 1.257). El cuello de botella es llevar gente al perfil: solo 1,8% de las vistas genera una visita.</div>
+<div><b>4. Los seguidores nuevos se desaceleran</b>54 en Feb–Mar, 61 en Abr–Jun, 40 en Jul–Sep, aunque las vistas casi se duplicaron en el último tramo. Ojo: el archivo cuenta altas, no bajas.</div>
+<div><b>5. El enlace de la bio casi no se usa fuera de campañas</b>Excluyendo agosto hubo ~14 clics en 8 meses. Los clics acompañan al alcance (correlación 0,63): sin picos de distribución, no hay tráfico a la web.</div>
+<div><b>6. Mejores momentos de publicación</b>Lunes tiene el mayor promedio de vistas (373/día) y lunes, martes y viernes el mayor promedio de interacciones. Sábados y domingos tienen menos visitas al perfil (3,1 y 3,8 por día frente a 5 a 6,6 en la semana). Tendencia, no regla: la muestra es chica.</div>
+<div><b>7. Mejor día reciente: 28/9</b>55 interacciones, 26 visitas al perfil (máximo del año) y 4 seguidores con 831 vistas. Tras ese pico, el 30/9 a 3/10 cae a 20 a 90 vistas por día: la actividad depende de publicaciones puntuales y no hay base constante.</div>
+<div class="warn"><b>Calidad de datos</b>Espectadores figura en 0 hasta el 17/3 y hay 43 días con vistas pero sin espectadores (hasta el 7/6): el alcance de ese tramo está subestimado. Además, sumar espectadores diarios no equivale al alcance único del período.</div>
+</div>
+<p class="note" style="margin-top:12px">Qué haría con esto: repetir los formatos de feb–mar y del 28/9 en vez de depender de picos fríos; sumar un llamado a la acción al enlace en cada pieza de alto alcance; y publicar con continuidad semanal para evitar los valles de menos de 50 vistas por día.</p></div>
+</main>
+<script>
+const D={"views":[78,99,49,22,5,23,601,259,177,30,13,568,572,657,527,494,158,144,275,204,53,186,28,11,846,908,80,156,591,212,59,308,29,483,213,123,1295,999,260,1311,634,243,562,285,128,462,496,51,170,666,511,413,208,359,104,38,36,1291,480,222,767,444,212,146,75,189,87,611,337,97,90,421,111,66,340,132,181,196,280,148,30,32,23,318,316,368,258,96,141,39,308,36,6,15,249,187,125,481,226,73,39,153,276,98,10,66,8,319,156,13,47,43,8,6,9,92,107,26,6,2,183,23,15,191,914,204,33,27,150,65,186,213,638,395,69,450,689,240,188,225,56,30,53,5,515,166,28,36,35,26,13,351,176,9,7,0,8,4,5,88,79,65,39,603,27,196,129,43,44,26,56,19,63,30,390,337,1625,1627,1510,593,479,129,10,20,8,9,573,1498,562,302,549,338,669,1027,714,1503,976,497,710,683,1106,588,399,677,886,439,499,78,257,307,227,237,55,45,100,84,22,516,318,132,32,17,543,543,94,233,95,358,173,225,98,32,23,800,643,831,516,89,44,21,23],"reach":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,99,151,116,46,138,137,11,4,207,172,110,58,136,32,7,12,409,165,78,300,209,132,60,30,91,54,242,138,35,13,263,86,40,184,96,79,71,180,88,16,7,7,132,100,153,90,30,106,17,229,23,2,6,88,87,36,99,136,51,25,86,67,39,3,5,2,256,123,2,5,4,2,3,2,82,80,3,3,0,84,15,0,54,439,107,16,10,74,33,128,80,228,164,32,159,336,123,124,138,31,12,9,4,171,58,20,16,13,11,7,180,67,3,4,0,3,2,2,74,60,50,34,272,21,88,54,26,23,15,29,12,9,12,150,111,1271,1260,1182,439,357,103,5,2,3,2,270,635,292,166,246,179,331,576,363,834,484,293,456,453,687,375,250,392,567,248,230,34,109,57,112,74,25,14,63,59,7,129,111,38,17,5,136,193,42,114,48,113,57,149,68,7,5,264,239,263,152,27,23,10,4],"inter":[2,3,0,0,0,0,19,7,0,0,0,12,37,37,17,23,1,4,12,9,1,6,1,0,41,34,4,12,5,1,0,13,0,15,14,3,34,24,2,27,24,7,15,8,0,17,3,0,1,14,19,2,2,2,0,1,0,127,30,11,29,23,8,5,2,4,1,21,2,1,1,5,1,2,10,1,1,2,2,0,1,2,0,10,2,20,3,1,1,0,5,0,0,0,3,6,0,15,4,3,1,6,10,2,0,0,0,9,3,0,0,0,0,0,0,1,5,0,1,0,5,1,0,2,40,5,1,0,6,0,3,6,13,19,0,1,20,8,14,5,1,0,0,0,11,1,2,1,0,0,0,2,3,1,0,0,0,0,0,12,4,2,2,29,0,6,4,2,1,1,2,1,1,0,3,5,1,3,1,0,1,0,0,1,0,0,4,24,5,2,8,1,2,3,5,25,12,2,1,2,7,2,3,0,1,0,7,3,9,1,9,6,1,1,4,0,0,14,11,2,2,0,7,26,2,6,0,8,2,4,0,0,1,36,26,55,28,0,3,0,0],"visits":[2,3,4,4,1,6,21,16,15,4,0,7,8,7,25,21,2,12,10,7,6,5,2,1,13,13,1,5,11,8,3,3,3,7,4,4,15,3,3,14,19,1,14,5,3,4,22,15,5,9,8,7,3,2,6,2,2,9,17,5,7,9,10,2,5,5,0,11,10,8,2,4,1,0,6,2,5,6,9,2,5,4,2,6,6,4,3,4,2,7,3,4,2,4,3,1,2,10,0,2,2,2,2,4,2,1,0,4,6,2,5,4,2,0,0,0,1,3,2,4,0,1,1,4,13,5,3,1,2,1,3,10,4,5,6,1,5,3,3,7,5,3,0,0,4,6,2,1,1,1,0,2,2,6,1,1,0,1,4,6,1,1,1,7,1,1,4,3,9,2,5,4,9,2,3,7,5,2,11,7,2,3,1,2,1,3,7,18,10,5,8,3,11,10,11,14,19,6,5,9,11,6,10,10,6,4,3,6,1,7,12,8,1,4,0,7,6,2,7,4,2,1,5,5,6,5,0,0,5,7,5,1,4,6,5,26,8,7,2,2,2],"follows":[0,1,1,0,0,1,0,2,3,1,0,1,0,1,2,0,3,2,1,1,1,1,0,0,2,4,0,0,0,0,2,0,0,0,1,2,1,0,0,0,2,0,1,1,0,1,7,5,1,0,1,1,0,0,0,0,0,3,2,0,0,3,2,2,0,0,0,1,1,0,1,1,1,1,0,0,0,1,0,1,0,1,0,0,3,1,0,0,2,0,1,0,0,1,0,0,0,1,0,1,1,1,1,1,0,2,0,0,1,0,0,1,0,0,0,0,1,0,1,0,2,0,0,0,1,0,0,0,1,0,1,4,0,1,2,0,1,1,2,1,3,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,1,0,0,1,0,1,0,0,0,0,1,0,1,0,0,0,0,0,1,3,1,1,1,0,2,1,1,1,0,0,1,0,0,1,0,0,1,0,0,0,0,1,0,0,0,1,1,2,0,0,0,0,0,2,0,1,0,0,4,1,1,1,1,0],"clicks":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,0,0,0,0,0,0,0,0,2,0,1,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,8,4,1,2,0,0,0,0,0,0,4,0,1,4,2,5,2,9,2,4,6,3,6,5,3,0,1,7,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]};
+const M=[['views','Visualizaciones','--c1'],['reach','Espectadores','--c2'],['inter','Interacciones','--c3'],['visits','Visitas al perfil','--c4'],['follows','Nuevos seguidores','--c5'],['clicks','Clics en enlace','--c6']];
+const n=D.views.length,T0=Date.UTC(2026,1,5),DAY=864e5,L=i=>new Date(T0+i*DAY);
+const iso=i=>L(i).toISOString().slice(0,10),fm=i=>L(i).toLocaleDateString('es-AR',{day:'numeric',month:'short',timeZone:'UTC'});
+const nf=x=>Math.round(x).toLocaleString('es-AR'),pc=x=>(x*100).toLocaleString('es-AR',{maximumFractionDigits:1})+'%';
+let a=0,b=n-1,gran='d',sel=new Set(['views']),ln,mo;
+const S=(k,x,y)=>{let s=0;for(let i=x;i<=y;i++)s+=D[k][i];return s};
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const $=id=>document.getElementById(id);
+function dlt(k){const len=b-a+1,pa=a-len;if(pa<0)return'';const p=S(k,pa,a-1),c=S(k,a,b);if(!p)return'';const d=(c-p)/p;return `<span class="d ${d>=0?'up':'dn'}">${d>=0?'▲':'▼'} ${pc(Math.abs(d))} vs período anterior</span>`}
+function render(){
+$('rng').textContent=`${fm(a)} a ${fm(b)} de 2026 · ${b-a+1} días · fuente: exportación de Instagram`;
+$('f').value=iso(a);$('t').value=iso(b);
+$('kpis').innerHTML=M.map(([k,l])=>`<div class="k"><span>${l}</span><b>${nf(S(k,a,b))}</b>${dlt(k)}</div>`).join('');
+const r=(x,y)=>y?pc(x/y):'—',v=S('views',a,b),i=S('inter',a,b),vi=S('visits',a,b),fo=S('follows',a,b),c=S('clicks',a,b);
+$('rates').innerHTML=[['Interacciones / vistas',r(i,v)],['Visitas al perfil / vistas',r(vi,v)],['Seguidores nuevos / visitas',r(fo,vi)],['Clics en enlace / visitas',r(c,vi)]].map(([l,x])=>`<div class="k"><span>${l}</span><b>${x}</b></div>`).join('');
+$('chips').innerHTML=M.map(([k,l,c])=>`<button class="chip ${sel.has(k)?'on':''}" data-k="${k}" style="${sel.has(k)?'background:'+css(c):''}">${l}</button>`).join('');
+// serie temporal
+const lab=[],idx=[];
+if(gran=='d'){for(let j=a;j<=b;j++)idx.push([j,j])}else{let j=a;while(j<=b){const e=Math.min(b,j+6);idx.push([j,e]);j=e+1}}
+idx.forEach(([x,y])=>lab.push(gran=='d'?fm(x):fm(x)+'–'+fm(y)));
+const multi=sel.size>1;$('nm').textContent=multi?'Con varias métricas, cada serie se muestra como % de su propio máximo.':'';
+const ds=M.filter(([k])=>sel.has(k)).map(([k,l,c])=>{let d=idx.map(([x,y])=>S(k,x,y));if(multi){const mx=Math.max(...d)||1;d=d.map(z=>z/mx*100)}
+return{label:l,data:d,borderColor:css(c),backgroundColor:css(c),borderWidth:2,pointRadius:idx.length>60?0:2,tension:.25}});
+if(ln)ln.destroy();
+ln=new Chart($('ln'),{type:'line',data:{labels:lab,datasets:ds},options:{maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:multi,labels:{color:css('--tx')}}},scales:{x:{ticks:{color:css('--mu'),maxTicksLimit:8},grid:{color:css('--bd')}},y:{beginAtZero:true,ticks:{color:css('--mu')},grid:{color:css('--bd')}}}}});
+// mensual
+const k0=M.find(([k])=>sel.has(k)),ml=[],md=[];let cur=-1;
+for(let j=a;j<=b;j++){const d=L(j),m=d.getUTCFullYear()*12+d.getUTCMonth();if(m!=cur){cur=m;ml.push(d.toLocaleDateString('es-AR',{month:'short',timeZone:'UTC'}));md.push(0)}md[md.length-1]+=D[k0[0]][j]}
+$('mn').textContent='· '+k0[1];
+if(mo)mo.destroy();
+mo=new Chart($('mo'),{type:'bar',data:{labels:ml,datasets:[{data:md,backgroundColor:css(k0[2]),borderRadius:4}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:css('--mu')},grid:{display:false}},y:{beginAtZero:true,ticks:{color:css('--mu')},grid:{color:css('--bd')}}}}});
+document.querySelectorAll('[data-p]').forEach(e=>e.classList.toggle('on',+e.dataset.p==(a==0&&b==n-1?0:-1)||(+e.dataset.p&&b==n-1&&b-a+1==+e.dataset.p)));
+document.querySelectorAll('[data-g]').forEach(e=>e.classList.toggle('on',e.dataset.g==gran));
+}
+document.addEventListener('click',e=>{const t=e.target;
+if(t.dataset.p!==undefined){const p=+t.dataset.p;b=n-1;a=p?Math.max(0,n-p):0;render()}
+else if(t.dataset.g){gran=t.dataset.g;render()}
+else if(t.dataset.k){const k=t.dataset.k;if(sel.has(k)){if(sel.size>1)sel.delete(k)}else sel.add(k);render()}});
+['f','t'].forEach(id=>$(id).addEventListener('change',()=>{const x=Math.round((Date.parse($('f').value)-T0)/DAY),y=Math.round((Date.parse($('t').value)-T0)/DAY);if(x>=0&&y<n&&x<=y){a=x;b=y}render()}));
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',render);
+render();
+</script></body></html>
